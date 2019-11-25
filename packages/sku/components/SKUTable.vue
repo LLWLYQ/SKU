@@ -1,9 +1,9 @@
 <template>
   <div class="ease-sku-table" style="width:1000px;margin-left:180px;height:300px;position: relative;">
     <button class="TBbtn" @click="TBbtn()" v-show="lists == '' ? false:true ">批量填充</button>
-    <span class="sp1">价格：</span><input type="text" style="width:100px;height:15px;"  class="inp1" v-model="Price" v-show="lists == '' ? false:true ">
-    <span class="sp2">库存：</span><input type="text" style="width:100px;height:15px;"  class="inp2" v-model="Stock" v-show="lists == '' ? false:true ">
-    <span class="sp3">成本价：</span><input type="text" style="width:100px;height:15px;"  class="inp3" v-model="Marked_Price" v-show="lists == '' ? false:true ">
+    <span class="sp1" v-show="lists == '' ? false:true ">价格：</span><input type="text" style="width:100px;height:15px;"  class="inp1" v-model="Price" v-show="lists == '' ? false:true ">
+    <span class="sp2" v-show="lists == '' ? false:true ">库存：</span><input type="text" style="width:100px;height:15px;"  class="inp2" v-model="Stock" v-show="lists == '' ? false:true ">
+    <span class="sp3" v-show="lists == '' ? false:true ">成本价：</span><input type="text" style="width:100px;height:15px;"  class="inp3" v-model="Marked_Price" v-show="lists == '' ? false:true ">
     <el-table
       border
       size="mini"
@@ -35,6 +35,9 @@
         label="库存"
         width="160">
         <template slot-scope="scope">
+          <div><span><dl>
+            <dt></dt>
+          </dl></span></div>
           <el-input :precision="2" :min="0" v-model="scope.row.stock" size="mini"></el-input>
         </template>
       </el-table-column>
@@ -101,17 +104,14 @@ export default {
       diu: []
     }
   },
-
   computed: {
     filter () {
       return this.data.filter(item => item.text && item.leaf.length)
     },
-
     columns () {
       return this.filter.map(item => item[this.optionText])
     }
   },
-
   watch: {
     filter: {
       deep: true,
@@ -130,7 +130,6 @@ export default {
       }
     }
   },
-
   methods: {
     TBbtn () {
       this.lists.map(item => {

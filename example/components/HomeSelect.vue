@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div class="homeselect">
     <div class="container">
       <h3 style="padding:0 0 15px 20px;border-bottom:1px solid #e5e5e5e5;">基础信息</h3>
       <span style="font-weight: bold;font-size: 14px;float:left;padding-top:8px;margin-left:110px;">宝贝标题</span><el-input v-model="input" placeholder="请输入内容" style="width:71%;margin-left:15px;"></el-input>
@@ -21,7 +21,7 @@
             </el-select>
           </div>
           <div class="Radio" v-if="slotProps.todo.data_type === 'radio'">
-             <el-radio v-model="slotProps.todo.value"  v-for="item in slotProps.todo.attr_value" :key="item.value" :label="item.value"></el-radio>
+            <el-radio v-model="slotProps.todo.value"  v-for="item in slotProps.todo.attr_value" :key="item.value" :label="item.value"></el-radio>
           </div>
           <div class="checkbox" v-if="slotProps.todo.data_type === 'checkbox'">
             <el-checkbox v-model="checkboxValue"  v-for="item in slotProps.todo.attr_value" :key="item.value" :label="item.value"></el-checkbox>
@@ -116,7 +116,6 @@
             <el-radio v-model="radio2" label="3">备选项</el-radio>
           </p>
         </div>
-        <button @click="btncs()">点我</button>
       </div>
     </div>
   </div>
@@ -124,7 +123,7 @@
 
 <script>
 import Vue from 'vue'
-import { Sku, SkuTable, PositiveDrive, ImageText, ckeditor4 } from '../packages/sku'
+import { Sku, SkuTable, PositiveDrive, ImageText, ckeditor4 } from '../../packages/sku'
 import { Input, Radio, Checkbox, DatePicker, CheckboxGroup } from 'element-ui'
 // import {  } from '../packages/sku/components/PositiveDrive'
 
@@ -338,23 +337,35 @@ export default {
   created () {
     this.categoryEmit()
     this.btncs()
+    this.sku()
   },
   methods: {
     categoryEmit (param) {
       this.value4 = param
-      console.log(param)
+    },
+    sku () {
+      // var local = String('(' + localStorage.getItem('DataID') + ')')
+      this.$ajax({
+        url: 'http://test1.yishangm.com/api/pc/get_cate_in_session',
+        method: 'get',
+        params: {
+          key: localStorage.getItem('DataID')
+        }
+      }).then((res) => {
+        console.log(res)
+      })
     },
     btncs () {
       // let postData = this.$qs.stringify([this.radio, this.radio1, this.radio2, this.checked, this.checked1, this.checked2, this.checked3, this.checked4, this.value4])
       // console.log(postData)
       this.$ajax({
+        // header: 'Access-Control-Allow-Origin',
         url: 'http://test1.yishangm.com/api/pc/goods_attr/list/174',
         method: 'get'
         // data: this.radio
         // data: this.val
       }).then((res) => {
         this.todos = res.data.data
-        console.log(this.todos)
         res.data.data.map(item => {
           item.attr_value.map(item => {
             // console.log(item.value_id)
@@ -418,7 +429,6 @@ html, body {
 #app {
   display: flex;
   justify-content: center;
-  padding-top: 20px;
   .container {
     width: 1400px;
     border:1px solid #e5e5e5;

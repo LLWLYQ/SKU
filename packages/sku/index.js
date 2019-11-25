@@ -4,6 +4,9 @@ import SkuTable from './components/SKUTable'
 import PositiveDrive from './components/PositiveDrive'
 import ImageText from './components/ImageText'
 import ckeditor4 from './components/ckeditor4'
+// import HomeSelect from './components/HomeSelect'
+
+// import selectGoods from './components/selectGoods'
 
 const components = [
   Sku,
@@ -11,6 +14,8 @@ const components = [
   PositiveDrive,
   ImageText,
   ckeditor4
+  // HomeSelect
+  // selectGoods
 ]
 
 const install = function (Vue) {
@@ -33,4 +38,13 @@ export {
   PositiveDrive,
   ImageText,
   ckeditor4
+  // HomeSelect
+  // selectGoods
 }
+// export default new Router({
+//   routes:[
+//     path:'/',
+//     name : 'HomeSelect',
+//     component : HomeSelect
+//   ]
+// })

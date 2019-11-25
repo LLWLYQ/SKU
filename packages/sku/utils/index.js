@@ -59,6 +59,7 @@ export function flatten (tree, stocks = [], options) {
         item = tree[column].leaf[row]
       } else {
         item = tree[column].leaf[0]
+        // item = [column].leaf[1]
       }
       if (!sku[optionValue] || !item[optionValue]) return
       mapKey.push(`${sku[optionValue]}_${item[optionValue]}`)

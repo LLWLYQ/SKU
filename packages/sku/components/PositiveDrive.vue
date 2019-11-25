@@ -21,6 +21,12 @@ export default {
   data () {
     return {
     }
+  },
+  methods: {
+    // handel () {
+    //   this.$ajax({
+    //   })
+    // }
   }
 }
 </script>
